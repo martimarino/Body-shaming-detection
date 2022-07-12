@@ -1,0 +1,121 @@
+import pandas as pd
+import random
+
+file = '2021-12-labeled.csv'
+
+def getStat(dict):
+    print("Building stats....")
+    data = pd.read_csv(file, index_col=False, delimiter=",")
+    dfk = pd.read_csv("keys.txt", sep=';')
+    dict = {
+        "grasso0": 0,
+        "grasso1": 0,
+        "grassa0": 0,
+        "grassa1": 0,
+        "ciccione0": 0,
+        "ciccione1": 0,
+        "cozza0": 0,
+        "cozza1": 0,
+        "culone0": 0,
+        "culone1": 0,
+        "nano0": 0,
+        "nano1": 0,
+        "nana0": 0,
+        "nana1": 0,
+        "obeso0": 0,
+        "obeso1": 0,
+        "pelata0": 0,
+        "pelata1": 0,
+        "pelato0": 0,
+        "pelato1": 0,
+        "balena0": 0,
+        "balena1": 0,
+        "secca0": 0,
+        "secca1": 0
+    }
+    Words = dfk['Words'].values
+    for i in range(len(data)):
+        for word in Words:
+            if word in data.at[i, 'Text'].lower():
+                if data.at[i, 'Class'] == "0":
+                    key = word + "0"
+                    dict[key] = dict[key]+1
+                    print("************** -> 0")
+                if data.at[i, 'Class'] == "1":
+                    key = word + "1"
+                    dict[key] = dict[key]+1
+                    print("************** -> 1")
+
+    print("Done")
+    print(dict)
+
+if __name__ == '__main__':
+
+    df = pd.read_csv(file, index_col=False, delimiter=",")
+
+    #df.insert(3, 'Class', " ", allow_duplicates=True)
+    #df.to_csv(file, index=False, sep=',')
+
+
+
+    # del df['Unnamed: 0.1']
+    # del df['Unnamed: 0.2']
+    # del df['Unnamed: 0.3']
+    # del df['Unnamed: 0.4']
+    # del df['Unnamed: 0.5']
+    # del df['Unnamed: 0.6']
+    # del df['Unnamed: 0']
+    # df.to_csv(file, index=False, sep=',')
+
+    s = ""
+    u = False
+
+    while 1:
+        n = random.randint(0, len(df) - 1)
+        # --------------------------------- Error cases -------------------------------------
+        if s != "" and s not in df.at[n, "Text"]:  # ricerca per parola
+            continue
+        if (u is False) and (
+                df.at[n, 'Class'] == "0" or df.at[n, "Class"] == "1"):  # non voglio modificare e sono già classificate
+            continue
+        if (u is True) and (                                            # voglio modificare e non sono classificate
+                df.at[n, 'Class'] != "0" and df.at[n, "Class"] != "1"):
+            continue
+
+        print("\n")
+        print("[", n, "]")
+        print(df.at[n, 'Text'])
+
+        if u is True:                                                   # se già classificati (modalità update)
+            print("\n***Actual label: ", df.at[n, 'Class'], "***\n")
+
+        print("\n--------------------------------\nu : Modifica\ts: Parola da cercare\tdict: Statistiche\tspace: new "
+              "iteration\t f = cerca id\n--------------------------------\n")
+        text = input("Label: ")
+
+        if text != "0" and text != "1":
+
+            if text == "dict":
+                getStat(dict)
+
+            if text == "f":
+                id = input("Insert id: ")
+                id = int(id)
+                print(df.at[id, 'Text'])
+                l = input("Insert value: ")
+                df.at[id, 'Class'] = text
+                df.to_csv(file, index=False, sep=',')
+
+            if text == "s":  # Select new word
+                s = input("Insert word to find: ")
+
+            if text == "u":  # update modes
+                u = not u
+
+        if text == "0" or text == "1" or text == "":
+            # Set cell value at nth row and 4rt column
+            df.at[n, 'Class'] = text
+            print(df.at[n, 'Class'])
+            print("Text: " + df.at[n, 'Class'])
+            df.to_csv(file, index=False, sep=',')
+            text = ""

@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/BSblocker.iml" filepath="$PROJECT_DIR$/.idea/BSblocker.iml" />
+      <module fileurl="file://$PROJECT_DIR$/BSblocker_app/BSblocker_app.iml" filepath="$PROJECT_DIR$/BSblocker_app/BSblocker_app.iml" />
     </modules>
   </component>
 </project>

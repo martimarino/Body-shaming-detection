@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #1DA1F2;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="180.0" layoutY="22.0" text="Welcome to BSBlocker" textFill="#14171a">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <SplitPane dividerPositions="0.3786407766990291" layoutX="36.0" layoutY="67.0" orientation="VERTICAL" prefHeight="311.0" prefWidth="528.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="168.0" prefWidth="578.0" style="-fx-background-color: #F5F8FA;">
+               <children>
+                  <Button layoutX="199.0" layoutY="57.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #E1E8ED;" text="Start" textFill="#14171a" />
+                  <Label layoutX="150.0" layoutY="24.0" text="Click the button to start the selecting process" textFill="#14171a" />
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="150.0" prefWidth="551.0">
+               <children>
+                  <ScrollPane layoutY="-5.0" prefHeight="197.0" prefWidth="526.0">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="196.0" prefWidth="511.0" style="-fx-background-color: #F5F8FA;" />
+                    </content>
+                  </ScrollPane>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>

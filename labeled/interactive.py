@@ -2,7 +2,7 @@ import pandas as pd
 import random
 from colorama import Fore, Style
 
-file = '2022-03-labeled.csv'
+file = '2022-04-peak-labeled.csv'
 
 
 def count(df):
@@ -46,6 +46,7 @@ if __name__ == '__main__':
     u = False
 
     while 1:
+
 
         n = random.randint(0, len(df) - 1)
         # --------------------------------- Error cases -------------------------------------

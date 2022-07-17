@@ -9,8 +9,5 @@
         <module name="BSblocker_app" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="BSblocker_app" target="17" />
-    </bytecodeTargetLevel>
   </component>
 </project>

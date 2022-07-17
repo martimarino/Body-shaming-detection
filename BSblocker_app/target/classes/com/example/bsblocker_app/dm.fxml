@@ -43,9 +43,9 @@
             <ComboBox fx:id="max_users" layoutX="75.0" layoutY="172.0" prefHeight="26.0" prefWidth="110.0" promptText="choose">
                 <items>
                     <FXCollections fx:factory="observableArrayList">
-                        <String fx:value="1 min" />
-                        <String fx:value="5 min" />
-                        <String fx:value="30 min" />
+                        <String fx:value="10" />
+                        <String fx:value="30" />
+                        <String fx:value="50" />
                     </FXCollections>
                 </items>
             </ComboBox>

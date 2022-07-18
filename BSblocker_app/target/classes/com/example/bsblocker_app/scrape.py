@@ -1,4 +1,5 @@
-from datetime import date
+
+import twint
 import pandas as pd
 
 c = twint.Config()
@@ -9,5 +10,5 @@ c.Store_csv = True       # store tweets in a csv file
 c.Output = "body_shaming_tweets.csv"     # path to csv file
 
 twint.run.Search(c)
-df = pd.read_csv('body_shaming_tweets'+date.today.strftime("%Y-%m-%d %H:%M:%S Z")+'.csv')
+df = pd.read_csv('body_shaming_tweets.csv')
 

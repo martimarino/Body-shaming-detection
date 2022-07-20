@@ -3,7 +3,7 @@ from tkinter.messagebox import showerror
 
 import ui
 import tkinter as tk
-from tkinter import ttk, END, LEFT, BOTH, CENTER
+from tkinter import ttk, END, LEFT, BOTH, CENTER, RIGHT, font
 
 
 # Press Maiusc+F10 to execute it or replace it with your code.
@@ -23,14 +23,15 @@ if __name__ == '__main__':
     root.geometry('600x400+50+50')
     root.resizable(False, False)
     root.attributes('-topmost', 1)
-    tk.Label(root, text='Welcome to BSblocker').pack()
+    welcome = tk.Label(root, text='Welcome to BSblocker', font=('System Bold',20,'bold'), fg="white", bg="#1DA1F2", pady=10).pack()
     # root.iconbitmap('./assets/pythontutorial.ico')
-    tk.Label(root, text='Select time period:').pack()
+    time = tk.Label(root, text='Select time period:', font=('System Bold',15,'bold'), fg="white", bg="#1DA1F2", pady=10).pack()
     selected_month = tk.StringVar()
     month_cb = ttk.Combobox(root, textvariable=selected_month)
     month_cb['values'] = ('1 min', '5 min', '10 min')
     month_cb['state'] = 'readonly'
-    month_cb.pack(fill=tk.X, padx=5, pady=5)
+    month_cb.set('Select interval to scrape')
+    month_cb.pack(fill=tk.X, padx=150, pady=15)
     start_button = ttk.Button(
         root,
         text='Start',
@@ -38,16 +39,25 @@ if __name__ == '__main__':
     )
 
     start_button.pack(
-        ipadx=5,
+        ipadx=30,
         ipady=5
         #expand=True      //position centered
     )
 
-    scrollbar = ttk.Scrollbar(root, orient='vertical')
-    scrollbar.pack(fill=tk.X, padx=5, pady=5)
-    mylist = tk.Listbox(root, yscrollcommand=scrollbar.set)
-    mylist.pack(fill=BOTH)
+    frame = tk.Frame(root)
+    frame.pack(fill="both", padx=150, pady=30)
+    scrollbar = ttk.Scrollbar(frame, orient='vertical')
+    scrollbar.pack(side=RIGHT,fill="y")
+    mylist = tk.Listbox(frame, yscrollcommand=scrollbar.set)
+    #mylist.pack(expand=1, fill="both")
+    mylist.pack(fill="both")
+
     scrollbar.config(command=mylist.yview)
+
+    #******************* STYLE *****************
+    root.configure(background='#1DA1F2')
+
+
     root.mainloop()
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/

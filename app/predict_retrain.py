@@ -1,9 +1,13 @@
+import os
+
 import pandas as pd
 import numpy as np
 import datetime
 import pickle
 import string
 import time
+import preprocessing
+import BSblocker
 
 from sklearn.pipeline import Pipeline
 from sklearn.naive_bayes import ComplementNB
@@ -112,8 +116,8 @@ def incremental_cd(model):
     print("File created: ", interval_name, "\n")
 
     # train
-    training_data = preprocess(interval)
-    training_data = elaborate(training_data)
+    training_data = preprocessing.preprocess(interval)
+    training_data = preprocessing.elaborate(training_data)
 
     cd_training(training_data, i)
 
@@ -121,7 +125,10 @@ def incremental_cd(model):
 # ## - Concept drift main
 
 
-def main(tweet):
+def predict(date, username, tweet, output_file, text, mylist):
+
+    list = []
+    list.append(tweet)
 
     model = {"name": "ComplementNB", "fun": ComplementNB()}
 
@@ -129,11 +136,21 @@ def main(tweet):
 
     loaded_model = pickle.load(open(model['name'] + '.sav', 'rb'))
 
-    predicted = loaded_model.predict(tweet)
+    predicted = loaded_model.predict(list)
 
-    return predicted
+    df = pd.DataFrame([[date, text, username, predicted[0]]], columns=['datetime', 'text', 'username', 'target'])
+    if not os.path.isfile("./predicted/" + output_file):
+        df.to_csv("./predicted/" + output_file, header='column_names', index=False)
+    else:  # else it exists so append without writing the header
+        df.to_csv("./predicted/" + output_file, mode='a', header=False, index=False)
 
+    print(predicted, tweet)
+    if predicted == 1:
+        BSblocker.show_users(username, mylist)
+
+
+def main():
+    pass
 
 if __name__ == "__main__":
-    data = sys.argv[1]
-    main(tweet)
+    main()

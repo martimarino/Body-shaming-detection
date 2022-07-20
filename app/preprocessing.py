@@ -2,14 +2,15 @@
 
 import re
 import string
-import utility
-import sys
 
+import nltk
 import pandas as pd
 
 from nltk.corpus import stopwords
 from nltk.stem import SnowballStemmer
 from nltk.tokenize import word_tokenize
+
+import predict_retrain
 
 
 def clean(tweet):
@@ -100,6 +101,7 @@ def preprocessing_steps(data):
 
 
 def preprocess(data):
+
     data = preprocessing_steps(data)
 
     print("Preprocessing done")
@@ -173,11 +175,14 @@ def elaborate(tweet):
     return new_tweet
 
 
-def main(data):
+def prep(date, username, data, output_file, mylist):
+    text = data
     data = preprocess(data)
     data = elaborate(data)
-    return data
+    predict_retrain.predict(date, username, data, output_file, text, mylist)
 
+def main():
+    pass
 
 if __name__ == "__main__":
-    data = sys.argv[1]
+    main()

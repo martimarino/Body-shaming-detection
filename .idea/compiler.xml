@@ -11,6 +11,12 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="BSblocker_app" target="17" />
+      <module name="twitter4j-appengine" target="6" />
+      <module name="twitter4j-async" target="6" />
+      <module name="twitter4j-core" target="6" />
+      <module name="twitter4j-examples" target="8" />
+      <module name="twitter4j-http2-support" target="6" />
+      <module name="twitter4j-stream" target="6" />
     </bytecodeTargetLevel>
   </component>
 </project>

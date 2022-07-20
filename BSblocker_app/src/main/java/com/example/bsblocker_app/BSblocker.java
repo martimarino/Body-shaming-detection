@@ -10,7 +10,18 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.ScrollPane;
 import javafx.stage.Stage;
 
+import twitter4j.*;
+import twitter4j.Status;
+import twitter4j.Twitter;
+import twitter4j.TwitterException;
+import twitter4j.TwitterFactory;
+import twitter4j.auth.AccessToken;
+import twitter4j.conf.ConfigurationBuilder;
+
+import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class BSblocker extends Application {
 
@@ -20,6 +31,12 @@ public class BSblocker extends Application {
     private Button start, stop;
     @FXML
     private ScrollPane scrollPane;
+
+    static final String CONSUMER_KEY = "ecwQTUJQiCXGNn1PNrA6vEPGI";
+    static final String CONSUMER_SECRET = "DRPjvsD6p2M1W6cWAJOxPZTUHN9AURE32kDnkBPmKzBus7nnm6";
+    static final String ACCESS_TOKEN = "1387046165426835465-I8fMY7raJXeavEDGklAjBPg3WFxEWv";
+    static final String ACCESS_TOKEN_SECRET = "LKyW4E3dje14gmqx0ZgCSp7EjxF56CcyedyqvyIjQEIEi";
+
 
     Alert a = new Alert(Alert.AlertType.NONE);
 
@@ -43,6 +60,11 @@ public class BSblocker extends Application {
 
     }
 
+    private String resolvePythonScriptPath(String path){
+        File file = new File(path);
+        return file.getAbsolutePath();
+    }
+
     public void startScraping() throws IOException {
         String i, u = "";
 
@@ -61,14 +83,52 @@ public class BSblocker extends Application {
         System.out.println("Max users: " + u);
         System.out.println("Start collecting...");
 
+       ProcessBuilder processBuilder = new ProcessBuilder("C:\\Users\\matre\\OneDrive - University of Pisa\\Desktop\\Body-shaming-detection\\venv\\Scripts\\python", resolvePythonScriptPath("BSblocker_app/src/main/java/com/example/bsblocker_app/scrape.py"));
+        processBuilder.redirectErrorStream(true);
 
-        String[] cmd = {
-                "/bin/bash",
-                "-c",
-                "echo password | python scrape.py '"/* + packet.toString() + "'"*/  //packet è per i parametri
+        Process process = processBuilder.start();
+        BufferedReader reader =
+                new BufferedReader(new InputStreamReader(process.getInputStream()));
+
+        String line;
+        while ((line = reader.readLine()) != null) {
+            System.out.println(line);
+        }
+
+        try {
+            int exitCode = process.waitFor();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+//*/
+/*        String[] cmd = {
+                "python3",
+                resolvePythonScriptPath("BSblocker_app/src/main/java/com/example/bsblocker_app/scrape.py")
+                //this.arg1,
         };
-        Runtime.getRuntime().exec(cmd);
+      Process p = Runtime.getRuntime().exec(cmd);
+      System.out.println(p);*/
 
+        /*String pathPython = "scrape.py";
+        String [] cmd = new String[2];
+        cmd[0] = "python";
+        cmd[1] = pathPython;
+        //cmd[2] = arg1;
+        Runtime r = Runtime.getRuntime();
+        Process p = r.exec(cmd);
+        System.out.println(p);*/
+//        BufferedReader in = new BufferedReader(new InputStreamReader(p.getInputStream()));
+//        System.out.println(in);
+//
+//        String s;
+//        while((s = in.readLine()) != null){
+//            System.out.println(s);
+//        }
+        //PythonInterpreter interpreter = new PythonInterpreter();
+        //interpreter.exec("import sys\nsys.path.append('pathToModules if they are not there by default')\nimport yourModule");
+        //String command = "python scrape.py";
+        //Process p = Runtime.getRuntime().exec(command);
+        //System.out.println(p);
     }
 
 //    curl --request GET --location 'https://api.twitter.com/2/tweets/search/recent?tweet.fields=context_annotations&max_results=100&query=camping(nature%20OR%20%22outdoor%20actvities%22)' \
@@ -80,7 +140,6 @@ public class BSblocker extends Application {
 
         return;
     }
-
 
     public static void main(String[] args) {launch();}
 }

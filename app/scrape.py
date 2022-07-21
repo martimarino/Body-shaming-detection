@@ -45,7 +45,10 @@ def getFilteredTweets(interval, mylist, started):
                 if start.replace(tzinfo=utc) < tweet.date < end.replace(tzinfo=utc):
                     fetched = fetched + 1
                     print(tweet.content)
-                    preprocessing.prep(tweet.date, tweet.user.username, tweet.content, start.strftime("%Y-%m-%d_%H-%M-%S")+".csv", mylist, started)
+                    text = preprocessing.clean(tweet.content)
+                    if text == "":
+                        break
+                    preprocessing.prep(tweet.date, tweet.user.username, text, start.strftime("%Y-%m-%d_%H-%M-%S")+".csv", mylist, started)
                     tweets_list.append(
                         [tweet.date, tweet.content, tweet.user.username])
 

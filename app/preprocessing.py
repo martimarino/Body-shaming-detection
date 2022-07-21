@@ -175,11 +175,11 @@ def elaborate(tweet):
     return new_tweet
 
 
-def prep(date, username, data, output_file, mylist):
+def prep(date, username, data, output_file, mylist, started):
     text = data
     data = preprocess(data)
     data = elaborate(data)
-    predict_retrain.predict(date, username, data, output_file, text, mylist)
+    predict_retrain.predict(date, username, data, output_file, text, mylist, started)
 
 def main():
     pass

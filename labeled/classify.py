@@ -3,8 +3,7 @@ import random
 from colorama import Fore, Style
 
 
-file = '2022-05-labeled.csv'
-# file = '2022-06-peak-labeled.csv'
+file = 'period5-labeled.csv'
 
 def count(df):
 

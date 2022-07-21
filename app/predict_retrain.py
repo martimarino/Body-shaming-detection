@@ -1,11 +1,16 @@
+import csv
 import os
 
 import pandas as pd
 import numpy as np
-import datetime
+from datetime import datetime as dt
 import pickle
 import string
 import time
+
+import pytz
+from dateutil.parser import parser
+
 import preprocessing
 import BSblocker
 
@@ -125,7 +130,7 @@ def incremental_cd(model):
 # ## - Concept drift main
 
 
-def predict(date, username, tweet, output_file, text, mylist):
+def predict(date, username, tweet, output_file, text, mylist, started):
 
     list = []
     list.append(tweet)
@@ -146,7 +151,16 @@ def predict(date, username, tweet, output_file, text, mylist):
 
     print(predicted, tweet)
     if predicted == 1:
-        BSblocker.show_users(username, mylist)
+        already_existed = False
+        with open("./users_found.csv", 'r',newline='',  encoding="utf8") as f:
+            reader = csv.reader(f)
+            headings = next(reader)
+            for row in reader:
+                if pd.Timestamp(date).tz_convert("UTC").strftime("%Y-%m-%d %H:%M:%S") == pd.Timestamp(row[0]).tz_convert("UTC").strftime("%Y-%m-%d %H:%M:%S") and row[2] == username:
+                    already_existed = True
+        if not already_existed:
+            df.to_csv("./users_found.csv", mode='a', header=False, index=False)
+        BSblocker.show_users(username, mylist, started)
 
 
 def main():

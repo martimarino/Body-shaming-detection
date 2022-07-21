@@ -8,7 +8,7 @@ import snscrape.modules.twitter as sntwitter
 import pandas as pd
 import preprocessing
 
-def getFilteredTweets(interval, mylist):
+def getFilteredTweets(interval, mylist, started):
     # today = datetime.now() - timedelta(minutes=int(interval))
     start_time = datetime.now() - timedelta(days=1)  # date start scraping    20-07-2022 - 1 giorno = 19-07-2022
     end_time = start_time + timedelta(days=1)  # date end scraping   19-07-2022 + 1 giorno = 20-07-2022
@@ -45,7 +45,7 @@ def getFilteredTweets(interval, mylist):
                 if start.replace(tzinfo=utc) < tweet.date < end.replace(tzinfo=utc):
                     fetched = fetched + 1
                     print(tweet.content)
-                    preprocessing.prep(tweet.date, tweet.user.username, tweet.content, start.strftime("%Y-%m-%d_%H-%M-%S")+".csv", mylist)
+                    preprocessing.prep(tweet.date, tweet.user.username, tweet.content, start.strftime("%Y-%m-%d_%H-%M-%S")+".csv", mylist, started)
                     tweets_list.append(
                         [tweet.date, tweet.content, tweet.user.username])
 

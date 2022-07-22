@@ -1,12 +1,12 @@
 ,Accuracy,Execution time,Std
-ComplementNB,0.722707,1.4319 s,0.004399
-MultinomialNB,0.721561,1.4582 s,0.005267
-Logistic Regression,0.720304,5.2378 s,0.003269
-SVM,0.717701,5.3323 s,0.004545
-Stochastic Gradient,0.700121,1.5204 s,0.004646
-Random Forest,0.696825,21.8946 s,0.012049
-Gradient Boosting,0.686868,13.6267 s,0.007457
-Bagging,0.675512,25.3732 s,0.007561
-Ada Boost,0.670812,7.0824 s,0.008493
-Decision Tree,0.647522,3.7767 s,0.006961
-K Nearest,0.574241,1.808 s,0.009663
+ComplementNB,0.722707,2.42 s,0.004399
+MultinomialNB,0.721561,1.845 s,0.005267
+Logistic Regression,0.720304,4.8848 s,0.003269
+SVM,0.717701,11.3515 s,0.004545
+Stochastic Gradient,0.699557,1.8741 s,0.004855
+Random Forest,0.693331,37.5024 s,0.010199
+Gradient Boosting,0.685984,22.5652 s,0.005519
+Bagging,0.673037,53.6608 s,0.011945
+Ada Boost,0.670812,12.4091 s,0.008493
+Decision Tree,0.65152,6.312 s,0.01062
+K Nearest,0.574241,3.646 s,0.009663

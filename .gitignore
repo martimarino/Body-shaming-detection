@@ -1,5 +1,7 @@
+.gitignore
 *.zip 
 *.rar
 code
 Untitled.ipynb
 BSblocker.ipynb
+docs/Presentation.pptx

@@ -1,0 +1,17 @@
+\section{Introduction}
+
+“[The internet] has definitely played a significant role in amplifying the voice of people who are perpetuating the stigma and the bias and the shaming,” James Zervios, director of communications for the nonprofit Obesity Action Coalition, told Healthline. \cite{healthline}
+
+Social networks give users the possibility to communicate with all over the world.
+However, users often do not use these tools correctly, but as a means to spread unsolicited opinions. Being able to express an opinion from behind a screen makes people more free to write negative comments or insults and this leads to the problem of online bullying, named cyberbullying.
+
+One common form of cyberbullying is known as body shaming and consists in making critical comments about the shape or size of someone else's body.
+In addition to the important repercussions on self-esteem, studies conducted to date have reported a number of problems related to bodyshaming that can encourage the onset of real mental disorders and harmful behaviors. For example, body shaming has been found to reduce body confidence and to influence eating behaviors, school absenteeism, and increases levels of distress and insecurity. \cite{disorders}
+
+
+For these reasons, the idea proposed in this project is to analyze online contents with the purpose of identifying the accounts that publish content that are related to body shaming in order to possibly report them.
+
+\subsection{Goals}
+The main goal of this documentation is to describe the steps to realize body shaming detection from Twitter and to develop the \textbf{BSblocker} tool that can run the prediction model in real-time in order to obtain a list of the accounts that shame other people about their physical characteristics.
+Starting from a web-scraped data filtered with some keywords, a preprocessing phase was carried out for having a suitable dataset to classify. Different classifiers were trained and tested in order to better understand if a tweet contains body shaming sentences or not and the best one was selected according to several considerations.
+Finally, the objective of the online monitoring stage is to find out if the chosen model performs well even in the long-term prediction or if it suffers from concept drift and, once detected the type of concept drift, to alleviate it retraining the model appropriately.

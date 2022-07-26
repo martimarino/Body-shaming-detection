@@ -14,7 +14,7 @@ In order to understand if the ComplementNB model, built in the previous phases, 
 The goal is to analyze the behaviour of the built model during the days associated with the occur of some  events. Indeed, during these days, a change of the terminology used is expected and, for this reason, the corresponding tweets are particularly useful to highlight the concept drift. 
 The objective of this analysis is to adapt the vocabulary used by the model in order to find a way to alleviate the concept drift.
 
-The days highlighted in the diagram in Figure \ref{online-monitoring} correspond to the peaks chosen for the experiments conducted on the concept drift. \textbf{80 tweets} were randomly selected from every peak, except for the last peak for which were selected only \textbf{60 tweets} because the number of tweets decreases. Moreover, since no relevant peaks were found in May, 80 tweets were randomly taken from the entire month.
+The days highlighted in the diagram in Figure \ref{online-monitoring} correspond to the peaks chosen for the experiments conducted on the concept drift; \textbf{80 tweets} were randomly selected from every peak. Moreover, since no relevant peaks were found in May, 80 tweets were randomly taken from the entire month.
 The peak corresponding to the 1st of March has been discarded because too close to the test set: in a more central date with respect to the month, as 2022-03-10, the effects of concept drift may be more evident.
 
 \begin{figure}[H]
@@ -62,7 +62,7 @@ As suggested in \cite{greenpass} the 3 different types of concept drift that can
 \end{itemize}
 
 \noindent
-For each event, except for the last one where only 60 tweets were taken, 80 tweets were randomly selected, manually labeled and used as test set for the \textbf{static model} to verify if the concept drift can really be a problem for this work.  
+For each event 80 tweets were randomly selected, manually labeled and used as test set for the \textbf{static model} to verify if the concept drift can really be a problem for this work.  
 
 \vspace{5mm}
 \begin{table}[H]
@@ -79,7 +79,7 @@ Period1 & Peak 1 & 73.75 & 74.35 & 73.17 && 72.50 & 75.00 && 73.41 & 74.07 \\
 Period2 & Peak 2 & 72.50 & 70.45 & 75.00 && 77.50 & 67.50 && 73.80 & 71.05 \\
 Period3 &  May   & 73.75 & 72.09 & 75.67 && 77.50 & 70.00 && 74.69 & 72.72 \\
 Period4 & Peak 4 & 66.25 & 64.44 & 68.57 && 72.50 & 60.00 && 68.23 & 64.00 \\
-Period5 & Peak 5 & 60.00 & 60.71 & 59.37 && 56.66 & 63.33 && 58.62 & 61.29 \\
+Period5 & Peak 5 & 61.25 & 60.97 & 61.53 && 62.50 & 60.00 && 61.72 & 60.75 \\
 \hline
 \end{tabular}
 \caption{Static model}
@@ -88,7 +88,7 @@ Period5 & Peak 5 & 60.00 & 60.71 & 59.37 && 56.66 & 63.33 && 58.62 & 61.29 \\
 \noindent
 For incremental and sliding approach, the training set have been updated basing on the behaviour of the different approaches. 
 
-The \textbf{sliding approach} provides a new model for each new chunk of tweets, discarding the oldest and adding the newest, following the window dimension. The window dimension chosen was of 80 tweets (60 for July). For each peak, the new 80 (60) labeled tweets were inserted into the training set and the same number of the oldest tweets were removed. In this way, the number of tweets considered for the training set was always the same. The model is retrained each time considering the new tweets and the number of features changes during the various peaks. 
+The \textbf{sliding approach} provides a new model for each new chunk of tweets, discarding the oldest and adding the newest, following the window dimension. The window dimension chosen was of 80 tweets. For each peak, the new 80 labeled tweets were inserted into the training set and the same number of the oldest tweets were removed. In this way, the number of tweets considered for the training set was always the same. The model is retrained each time considering the new tweets and the number of features changes during the various peaks. 
 
 
 \vspace{5mm}
@@ -106,7 +106,7 @@ Period1 & Peak 1 & 73.75 & 72.09 & 75.67 && 77.50 & 70.00 && 74.69 & 72.72 \\
 Period2 & Peak 2 & 76.25 & 70.58 & 86.20 && 90.00 & 62.50 && 79.12 & 72.46 \\
 Period3 & May    & 71.25 & 68.08 & 75.75 && 80.00 & 62.50 && 73.56 & 68.49 \\
 Period4 & Peak 4 & 71.25 & 69.76 & 72.97 && 75.00 & 67.50 && 72.28 & 70.12 \\
-Period5 & Peak 5 & 63.33 & 64.28 & 62.50 && 60.00 & 66.66 && 62.06 & 64.51 \\
+Period5 & Peak 5 & 65.00 & 64.28 & 65.78 && 67.50 & 62.50 && 65.85 & 64.10 \\
 \hline
 \end{tabular}
 \caption{Sliding model}
@@ -114,7 +114,7 @@ Period5 & Peak 5 & 63.33 & 64.28 & 62.50 && 60.00 & 66.66 && 62.06 & 64.51 \\
 \end{table}
 
 \noindent
-The \textbf{incremental approach} foresees a new retrain of the model each time basing on a training set gradually incremented with the previous examples. The approach adopted is not purely incremental but it is an approach that re-evaluates the model at every new peak. At each peak the training set have been incremented using the tweets of the previous peaks. In this way, at the end, the dimension of the training set goes from 1576 to 2132. With this approach, as consequence of the increasing of the training set dimension, the number of features increases too. 
+The \textbf{incremental approach} foresees a new retrain of the model each time basing on a training set gradually incremented with the previous examples. The approach adopted is not purely incremental but it is an approach that re-evaluates the model at every new peak. At each peak the training set have been incremented using the tweets of the previous peaks. In this way, at the end, the dimension of the training set goes from 1576 to 2152. With this approach, as consequence of the increasing of the training set dimension, the number of features increases too. 
 
 \vspace{5mm}
 \begin{table}[H]
@@ -131,7 +131,7 @@ Period1 & Peak 1 & 71.25 & 68.88 & 74.28 && 77.50 & 65.00 && 74.94 & 69.33 \\
 Period2 & Peak 2 & 73.75 & 69.38 & 80.64 && 85.00 & 62.50 && 76.40 & 70.42 \\
 Period3 & May    & 72.50 & 70.45 & 75.00 && 77.50 & 67.50 && 73.80 & 71.05 \\
 Period4 & Peak 4 & 70.00 & 69.04 & 71.05 && 72.50 & 67.50 && 70.73 & 69.23 \\
-Period5 & Peak 5 & 66.66 & 65.62 & 67.85 && 70.00 & 63.33 && 67.74 & 65.51 \\
+Period5 & Peak 5 & 66.25 & 64.44 & 68.57 && 72.50 & 60.00 && 68.23 & 64.00 \\
 \hline
 \end{tabular}
 \caption{Incremental model}
@@ -143,7 +143,7 @@ As it is possible to observe in the (Figure \ref{online-monitoring-accuracy}), t
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width= 1\textwidth]{images/monitoring/accuracy_for_model.png}
+    \includegraphics[width= 1\textwidth]{images/monitoring/accuracy_for_model-ComplementNB.png}
     \caption{Accuracy for the three approaches} 
     \label{online-monitoring-accuracy}
 \end{figure}
@@ -153,7 +153,7 @@ The sliding approach results the one with the best performance except for the la
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width= 1\textwidth]{images/monitoring/features_for_model.png}
+    \includegraphics[width= 1\textwidth]{images/monitoring/features_for_model_ComplementNB.png}
     \caption{Number of features for each approach} 
     \label{online-monitoring-features}
 \end{figure}
